@@ -6,190 +6,173 @@
 <title>東京⇄KL 航空券ウォッチ</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Barlow+Semi+Condensed:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Noto+Sans+Mono:wght@400;700&display=swap">
 <style>
-/* Layout: 搭乗券風のサマリー → 目標価格までの距離 → 値動き2枚 → 日付カレンダー → 月比較・理由 → 便一覧 */
+/* デジタル庁デザインシステム準拠：キーカラー（青）1色＋ニュートラル＋セマンティック（成功・警告）。
+   セクションは見出しと1pxの区切り線で分け、カードで囲わない。余白は 8 / 16 / 24 / 40 / 64px。 */
 :root {
-  --bg: #f3f5f7;
-  --surface: #ffffff;
-  --ink: #12202c;
-  --ink-2: #4b5966;
-  --ink-3: #7c8792;
-  --line: #dde3e8;
-  --grid: #e9edf1;
-  --accent: #1c5cab;
-  --accent-soft: #e6effa;
-  --series: #2a78d6;
-  --target: #eb6834;
-  --band: #d6e8dc;
-  --good: #0ca30c; --good-ink: #0a6e0a; --good-bg: #e3f4e3;
-  --warn: #fab219; --warn-ink: #8a5d00; --warn-bg: #fdf1d6;
-  --wait: #2a78d6; --wait-ink: #1c5cab; --wait-bg: #e6effa;
-  --up: #c43a3a; --down: #0a7a0a;
-  --seq-ink: #ffffff; --seq-0: #cde2fb; --seq-1: #9ec5f4; --seq-2: #6da7ec; --seq-3: #3987e5; --seq-4: #256abf; --seq-5: #184f95;
-  --font-body: "Zen Kaku Gothic New", "Hiragino Sans", "Noto Sans JP", system-ui, sans-serif;
-  --font-num: "Barlow Semi Condensed", "Zen Kaku Gothic New", "Hiragino Sans", system-ui, sans-serif;
+  --bg: #ffffff;
+  --surface-subtle: #f2f2f2;
+  --ink: #1a1a1c;
+  --ink-2: #4d4d4d;
+  --ink-3: #666666;
+  --line: #d6d6d6;
+  --line-strong: #949494;
+  --key: #0031d8;
+  --key-strong: #00118f;
+  --key-soft: #e8f1fe;
+  --on-key: #ffffff;
+  --success: #197a4b; --success-bg: #e6f5ec;
+  --warning: #8a5a00; --warning-bg: #fff4d6;
+  --error: #ce0000;
+  --seq-0: #d9e6ff; --seq-1: #9db7f9; --seq-2: #7096f8; --seq-3: #3460fb; --seq-4: #0031d8; --seq-5: #000082;
+  --seq-ink: #ffffff;
+  --font: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+  --mono: "Noto Sans Mono", ui-monospace, "SFMono-Regular", monospace;
+  --s1: 8px; --s2: 16px; --s3: 24px; --s4: 40px; --s5: 64px;
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #0f151b; --surface: #182129; --ink: #eef2f5; --ink-2: #b4bec8; --ink-3: #85919c;
-    --line: #2a3640; --grid: #23303a; --accent: #6da7ec; --accent-soft: #1b2f47;
-    --series: #3987e5; --target: #d95926; --band: #2b5c3e; --seq-ink: #0f151b;
-    --good-ink: #5fd35f; --good-bg: #16301a; --warn-ink: #f5c35a; --warn-bg: #3a2e12;
-    --wait-ink: #86b6ef; --wait-bg: #1b2f47; --up: #f07a7a; --down: #5fd35f;
-    --seq-0: #1b3354; --seq-1: #184f95; --seq-2: #256abf; --seq-3: #3987e5; --seq-4: #6da7ec; --seq-5: #9ec5f4;
+    --bg: #111113; --surface-subtle: #1f1f22; --ink: #f2f2f2; --ink-2: #c7c7c7; --ink-3: #a3a3a3;
+    --line: #3a3a3e; --line-strong: #6e6e73; --key: #7096f8; --key-strong: #9db7f9; --key-soft: #14224a; --on-key: #111113;
+    --success: #6fd39c; --success-bg: #12301f; --warning: #f5c35a; --warning-bg: #33280c; --error: #ff7a7a;
+    --seq-0: #1a2a52; --seq-1: #23408f; --seq-2: #2f5bd0; --seq-3: #4979f5; --seq-4: #7c9ff7; --seq-5: #b7cbfb;
+    --seq-ink: #111113;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #0f151b; --surface: #182129; --ink: #eef2f5; --ink-2: #b4bec8; --ink-3: #85919c;
-  --line: #2a3640; --grid: #23303a; --accent: #6da7ec; --accent-soft: #1b2f47;
-  --series: #3987e5; --target: #d95926; --band: #2b5c3e; --seq-ink: #0f151b;
-  --good-ink: #5fd35f; --good-bg: #16301a; --warn-ink: #f5c35a; --warn-bg: #3a2e12;
-  --wait-ink: #86b6ef; --wait-bg: #1b2f47; --up: #f07a7a; --down: #5fd35f;
-  --seq-0: #1b3354; --seq-1: #184f95; --seq-2: #256abf; --seq-3: #3987e5; --seq-4: #6da7ec; --seq-5: #9ec5f4;
+  --bg: #111113; --surface-subtle: #1f1f22; --ink: #f2f2f2; --ink-2: #c7c7c7; --ink-3: #a3a3a3;
+  --line: #3a3a3e; --line-strong: #6e6e73; --key: #7096f8; --key-strong: #9db7f9; --key-soft: #14224a; --on-key: #111113;
+  --success: #6fd39c; --success-bg: #12301f; --warning: #f5c35a; --warning-bg: #33280c; --error: #ff7a7a;
+  --seq-0: #1a2a52; --seq-1: #23408f; --seq-2: #2f5bd0; --seq-3: #4979f5; --seq-4: #7c9ff7; --seq-5: #b7cbfb;
+  --seq-ink: #111113;
   color-scheme: dark;
 }
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
 body {
   margin: 0; background: var(--bg); color: var(--ink);
-  font: 15px/1.7 var(--font-body);
-  padding: max(16px, env(safe-area-inset-top)) 16px max(32px, env(safe-area-inset-bottom));
+  font-family: var(--font); font-size: 16px; line-height: 1.75; letter-spacing: .02em;
+  padding-inline: 16px;
+  padding-block: max(var(--s3), env(safe-area-inset-top)) max(var(--s5), env(safe-area-inset-bottom));
 }
-.wrap { max-width: 1080px; margin: 0 auto; display: grid; gap: 20px; }
-.num { font-family: var(--font-num); font-variant-numeric: tabular-nums; letter-spacing: .01em; }
-h1, h2, h3 { margin: 0; text-wrap: balance; }
-h2 { font-size: 17px; font-weight: 700; }
-.sub { color: var(--ink-2); font-size: 13px; }
-.muted { color: var(--ink-3); }
-a { color: var(--accent); }
-a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.wrap { max-width: 1040px; margin: 0 auto; }
+.num { font-variant-numeric: tabular-nums; }
+.mono { font-family: var(--mono); letter-spacing: 0; }
+h1, h2 { margin: 0; line-height: 1.4; text-wrap: balance; font-weight: 700; }
+h1 { font-size: 28px; letter-spacing: .01em; }
+h2 { font-size: 20px; }
+p { margin: 0; }
+.desc { color: var(--ink-2); }
+a { color: var(--key); text-decoration: underline; text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--key); outline-offset: 2px; border-radius: 4px; }
+svg.icon { width: 24px; height: 24px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 
-/* header */
-.top { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline; justify-content: space-between; }
-.top h1 { font-size: 20px; font-weight: 900; letter-spacing: .02em; }
-.top .updated { font-size: 13px; color: var(--ink-2); }
+/* page header */
+.page-head { display: grid; gap: var(--s1); padding-bottom: var(--s3); border-bottom: 1px solid var(--line); }
+.page-head .updated { color: var(--ink-2); }
 
-/* boarding pass */
-.pass { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; display: grid; grid-template-columns: 1fr auto; overflow: hidden; }
-.pass-main { padding: 22px 24px; display: grid; gap: 14px; min-width: 0; }
-.pass-stub { border-left: 2px dashed var(--line); padding: 22px 24px; display: grid; align-content: center; gap: 10px; min-width: 220px; }
-.route { display: flex; align-items: center; gap: 12px; }
-.iata { font-family: var(--font-num); font-weight: 700; font-size: 34px; line-height: 1; letter-spacing: .04em; }
-.iata small { display: block; font-family: var(--font-body); font-size: 12px; font-weight: 500; color: var(--ink-2); letter-spacing: 0; margin-top: 4px; }
-.plane { flex: 1; min-width: 28px; max-width: 160px; height: 2px; background: repeating-linear-gradient(90deg, var(--ink-3) 0 6px, transparent 6px 12px); position: relative; }
-.plane svg { position: absolute; right: -4px; top: -9px; width: 20px; height: 20px; fill: var(--ink-2); }
-.fields { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px 20px; }
-.field label { display: block; font-size: 11px; color: var(--ink-3); letter-spacing: .08em; }
-.field div { font-weight: 700; font-size: 15px; }
-.verdict { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px 6px 10px; border-radius: 999px; font-weight: 900; font-size: 17px; width: fit-content; }
-.verdict svg { width: 20px; height: 20px; flex: none; }
-.verdict.buy { background: var(--good-bg); color: var(--good-ink); }
-.verdict.lean { background: var(--warn-bg); color: var(--warn-ink); }
-.verdict.wait { background: var(--wait-bg); color: var(--wait-ink); }
-.price-label { font-size: 12px; color: var(--ink-2); }
-.price { font-family: var(--font-num); font-weight: 700; font-size: 46px; line-height: 1; font-variant-numeric: tabular-nums; }
-.delta { font-size: 13px; font-weight: 700; }
-.delta.up { color: var(--up); } .delta.down { color: var(--down); } .delta.flat { color: var(--ink-2); }
-.btn { display: inline-flex; justify-content: center; align-items: center; gap: 6px; background: var(--accent); color: #fff; text-decoration: none; font-weight: 700; padding: 10px 16px; border-radius: 10px; font-size: 14px; }
-:root[data-theme="dark"] .btn { color: #0f151b; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .btn { color: #0f151b; } }
-.verdict-note { font-size: 13px; color: var(--ink-2); max-width: 46ch; }
+/* sections */
+.section { padding-block: var(--s4); border-bottom: 1px solid var(--line); display: grid; gap: var(--s3); min-width: 0; }
+.section-head { display: grid; gap: var(--s1); }
+.cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s4); }
+.cols > .section { border-bottom: 0; padding-block: 0; }
+.cols-wrap { padding-block: var(--s4); border-bottom: 1px solid var(--line); }
 
-/* cards */
-.card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 20px 22px; display: grid; gap: 14px; min-width: 0; }
-.card-head { display: grid; gap: 2px; }
-.grid2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+/* summary */
+.summary { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--s4); align-items: start; }
+.status { display: flex; gap: var(--s2); padding: var(--s2); border: 1px solid currentColor; border-radius: 8px; }
+.status.buy { color: var(--success); background: var(--success-bg); }
+.status.lean { color: var(--warning); background: var(--warning-bg); }
+.status.wait { color: var(--key); background: var(--key-soft); }
+.status-body { display: grid; gap: 4px; }
+.status-label { font-weight: 700; font-size: 20px; line-height: 1.4; }
+.status-note { color: var(--ink); }
+.price-block { display: grid; gap: var(--s1); margin-top: var(--s3); }
+.price-label { color: var(--ink-2); }
+.price { font-size: 56px; font-weight: 700; line-height: 1; letter-spacing: 0; }
+.delta { font-weight: 700; }
+.delta.up { color: var(--error); } .delta.down { color: var(--success); } .delta.flat { color: var(--ink-2); font-weight: 400; }
+
+dl.facts { margin: 0; display: grid; grid-template-columns: auto 1fr; border-top: 1px solid var(--line); }
+dl.facts dt, dl.facts dd { margin: 0; padding: 12px 0; border-bottom: 1px solid var(--line); line-height: 1.5; }
+dl.facts dt { color: var(--ink-2); padding-right: var(--s3); white-space: nowrap; }
+dl.facts dd { font-weight: 700; min-width: 0; }
+.btn { display: inline-flex; justify-content: center; align-items: center; min-height: 48px; padding: 0 var(--s3); background: var(--key); color: var(--on-key); font-weight: 700; border-radius: 8px; text-decoration: underline; text-underline-offset: 3px; margin-top: var(--s3); }
+.btn:hover { background: var(--key-strong); }
 
 /* range bar */
-.range { position: relative; height: 92px; margin: 4px 8px 0; }
-.range-track { position: absolute; left: 0; right: 0; top: 40px; height: 12px; border-radius: 6px; background: var(--grid); }
-.range-band { position: absolute; top: 40px; height: 12px; background: var(--band); border-radius: 6px; }
-.range-band-label { position: absolute; top: 58px; font-size: 11px; color: var(--ink-2); transform: translateX(-50%); white-space: nowrap; }
+.range { position: relative; height: 104px; margin: 0 var(--s4); }
+.range-track { position: absolute; left: 0; right: 0; top: 48px; height: 8px; background: var(--surface-subtle); border: 1px solid var(--line); }
+.range-band { position: absolute; top: 48px; height: 8px; background: var(--seq-1); }
+.range-band-label { position: absolute; top: 60px; font-size: 14px; color: var(--ink-2); transform: translateX(-50%); white-space: nowrap; }
 .mark { position: absolute; top: 0; transform: translateX(-50%); display: grid; justify-items: center; }
-.mark .tag { font-size: 12px; font-weight: 700; white-space: nowrap; padding: 2px 8px; border-radius: 6px; background: var(--surface); border: 1px solid var(--line); }
-.mark .tick { width: 2px; height: 22px; margin-top: 2px; }
-.mark.now .tag { background: var(--ink); color: var(--surface); border-color: var(--ink); }
-.mark.now .tick { background: var(--ink); }
-.mark.target .tag { color: var(--target); border-color: var(--target); }
-.mark.target .tick { background: var(--target); }
-.scale { position: absolute; top: 74px; font-size: 11px; color: var(--ink-3); transform: translateX(-50%); }
-.gap-note { font-size: 14px; }
-.gap-note b { font-family: var(--font-num); font-size: 18px; }
+.mark .tag { font-size: 14px; font-weight: 700; white-space: nowrap; padding: 4px var(--s1); border-radius: 4px; line-height: 1.3; }
+.mark .tick { width: 0; height: 22px; margin-top: 2px; }
+.mark.now .tag { background: var(--ink); color: var(--bg); }
+.mark.now .tick { width: 2px; background: var(--ink); }
+.mark.target .tag { background: var(--bg); color: var(--ink); border: 1px solid var(--ink); }
+.mark.target .tick { border-right: 2px dashed var(--ink); }
+.scale { position: absolute; top: 84px; font-size: 14px; color: var(--ink-3); transform: translateX(-50%); }
 
 /* charts */
-.chart-box { position: relative; height: 240px; }
-.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 12px; color: var(--ink-2); }
-.legend span { display: inline-flex; align-items: center; gap: 6px; }
-.sw { width: 16px; height: 3px; border-radius: 2px; display: inline-block; }
-.sw.dash { background: repeating-linear-gradient(90deg, var(--target) 0 4px, transparent 4px 7px) !important; }
+.chart-box { position: relative; height: 260px; }
+.legend { display: flex; flex-wrap: wrap; gap: var(--s1) var(--s3); color: var(--ink-2); font-size: 14px; }
+.legend span { display: inline-flex; align-items: center; gap: var(--s1); }
+.sw { width: 20px; height: 0; border-top: 2px solid var(--key); display: inline-block; }
+.sw.dash { border-top: 2px dashed var(--ink-2); }
 
 /* heatmap */
-.heat-scroll { overflow-x: auto; }
-.heat { border-collapse: separate; border-spacing: 2px; font-size: 11px; }
-.heat th { font-weight: 500; color: var(--ink-2); padding: 2px 4px; white-space: nowrap; }
-.heat th.row { text-align: right; padding-right: 8px; font-size: 12px; position: sticky; left: 0; background: var(--surface); }
-.heat td { width: 38px; min-width: 38px; height: 38px; border-radius: 4px; text-align: center; font-family: var(--font-num); font-weight: 600; font-size: 11px; cursor: default; position: relative; }
-.heat td.best { outline: 2px solid var(--target); outline-offset: -2px; }
-.heat .dow-sat { color: var(--accent); } .heat .dow-sun { color: var(--up); }
-.heat-legend { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--ink-2); flex-wrap: wrap; }
+.scroll-x { overflow-x: auto; }
+.heat { border-collapse: separate; border-spacing: 2px; font-size: 14px; line-height: 1.3; }
+.heat th { font-weight: 400; color: var(--ink-2); padding: 2px 4px; white-space: nowrap; text-align: center; }
+.heat th.row { text-align: right; padding-right: var(--s1); position: sticky; left: 0; background: var(--bg); }
+.heat td { width: 40px; min-width: 40px; height: 40px; text-align: center; font-weight: 700; font-size: 14px; }
+.heat td.best { outline: 3px solid var(--ink); outline-offset: -3px; }
+.heat .sat { color: var(--key); } .heat .sun { color: var(--error); }
+.heat-legend { display: flex; align-items: center; gap: var(--s1) var(--s2); color: var(--ink-2); font-size: 14px; flex-wrap: wrap; }
 .heat-legend .ramp { display: flex; gap: 2px; }
-.heat-legend .ramp i { width: 22px; height: 12px; border-radius: 3px; display: block; }
-.heat-legend .bestkey { display: inline-flex; align-items: center; gap: 6px; }
-.heat-legend .bestkey i { width: 14px; height: 14px; border: 2px solid var(--target); border-radius: 3px; display: block; }
+.heat-legend .ramp i { width: 24px; height: 16px; display: block; }
+.heat-legend .bestkey { display: inline-flex; align-items: center; gap: var(--s1); }
+.heat-legend .bestkey i { width: 16px; height: 16px; border: 3px solid var(--ink); display: block; }
 
-/* month bars */
-.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; width: fit-content; }
-.seg button { font: inherit; font-size: 13px; border: 0; background: transparent; color: var(--ink-2); padding: 5px 12px; cursor: pointer; }
-.seg button[aria-pressed="true"] { background: var(--accent-soft); color: var(--accent); font-weight: 700; }
-.mbars { display: grid; gap: 12px; }
-.mbar { display: grid; grid-template-columns: 88px 1fr; gap: 10px; align-items: center; }
-.mbar .name { font-size: 13px; font-weight: 700; }
-.mbar .name.here { color: var(--accent); }
-.mbar .track { position: relative; height: 26px; }
-.mbar .fill { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 0 4px 4px 0; background: var(--seq-1); }
-.mbar .fill.here { background: var(--series); }
-.mbar .val { position: absolute; top: 50%; transform: translateY(-50%); font-size: 13px; font-weight: 700; white-space: nowrap; padding-left: 8px; }
+/* month comparison */
+.seg { display: inline-flex; border: 1px solid var(--line-strong); border-radius: 8px; overflow: hidden; width: fit-content; }
+.seg button { font: inherit; border: 0; background: var(--bg); color: var(--ink); min-height: 44px; padding: 0 var(--s2); cursor: pointer; }
+.seg button + button { box-shadow: inset 1px 0 0 var(--line-strong); }
+.seg button[aria-pressed="true"] { background: var(--key); color: var(--on-key); font-weight: 700; }
+table.list { width: 100%; border-collapse: collapse; }
+table.list th { text-align: left; font-weight: 700; padding: 12px var(--s2) 12px 0; border-bottom: 1px solid var(--line-strong); white-space: nowrap; line-height: 1.5; }
+table.list td { padding: 12px var(--s2) 12px 0; border-bottom: 1px solid var(--line); white-space: nowrap; line-height: 1.5; vertical-align: middle; }
+table.list .r { text-align: right; }
+table.list td.bar { width: 45%; min-width: 120px; }
+.bar i { display: block; height: 16px; background: var(--seq-1); }
+.bar i.here { background: var(--key); }
 
 /* reasons */
-.reasons { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
-.reasons li { display: grid; grid-template-columns: 22px 1fr; gap: 8px; font-size: 14px; }
-.reasons li svg { width: 18px; height: 18px; margin-top: 3px; }
+.reasons { margin: 0; padding-left: 1.25em; display: grid; gap: var(--s1); }
 
-/* table */
-.tbl-scroll { overflow-x: auto; }
-table.list { width: 100%; border-collapse: collapse; font-size: 13px; }
-table.list th { text-align: left; font-weight: 500; color: var(--ink-3); font-size: 12px; padding: 6px 10px; border-bottom: 1px solid var(--line); white-space: nowrap; }
-table.list td { padding: 9px 10px; border-bottom: 1px solid var(--grid); white-space: nowrap; }
-table.list td.r, table.list th.r { text-align: right; }
-table.list tr.top-row td { font-weight: 700; }
-.pill { display: inline-block; font-size: 11px; padding: 1px 8px; border-radius: 999px; background: var(--grid); color: var(--ink-2); }
-.pill.direct { background: var(--accent-soft); color: var(--accent); }
+.foot { padding-top: var(--s3); color: var(--ink-2); font-size: 14px; display: grid; gap: var(--s1); }
+.error { padding-block: var(--s4); display: grid; gap: var(--s1); }
 
-.foot { font-size: 12px; color: var(--ink-3); display: grid; gap: 4px; }
-.error { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 24px; }
-
-/* tooltip */
-#tip { position: fixed; pointer-events: none; z-index: 10; background: var(--ink); color: var(--surface); font-size: 12px; line-height: 1.5; padding: 6px 10px; border-radius: 6px; white-space: nowrap; opacity: 0; transition: opacity .1s; }
+#tip { position: fixed; pointer-events: none; z-index: 10; background: var(--ink); color: var(--bg); font-size: 14px; line-height: 1.5; padding: var(--s1) 12px; border-radius: 4px; white-space: nowrap; opacity: 0; }
 
 @media (max-width: 760px) {
-  .pass { grid-template-columns: 1fr; }
-  .pass-stub { border-left: 0; border-top: 2px dashed var(--line); min-width: 0; }
-  .grid2 { grid-template-columns: 1fr; }
-  .price { font-size: 40px; }
-  .iata { font-size: 28px; }
+  h1 { font-size: 24px; }
+  .summary, .cols { grid-template-columns: minmax(0, 1fr); }
+  .price { font-size: 48px; }
+  .range { margin: 0 var(--s3); }
 }
-@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
 </style>
 </head>
 <body>
 <div class="wrap" id="app">
-  <div class="top">
-    <h1>東京 ⇄ クアラルンプール 航空券ウォッチ</h1>
-    <div class="updated">読み込み中…</div>
-  </div>
+  <header class="page-head">
+    <h1>東京⇄クアラルンプール 航空券ウォッチ</h1>
+    <p class="updated">読み込み中</p>
+  </header>
 </div>
 <div id="tip" role="status"></div>
 
@@ -209,16 +192,14 @@ table.list tr.top-row td { font-weight: 700; }
   const AIRPORT = { NRT: "成田", HND: "羽田", KUL: "クアラルンプール" };
 
   const ICON = {
-    buy: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
-    lean: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5v5l3 2"/></svg>',
-    wait: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 4h10M7 20h10M8 4c0 5 8 5 8 8s-8 3-8 8M16 4c0 5-8 5-8 8s8 3 8 8"/></svg>',
-    plane: '<svg viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z" transform="rotate(90 12 12)"/></svg>',
-    dot: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 12h12M13 7l5 5-5 5"/></svg>'
+    buy: '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.75 2.75L16 10"/></svg>',
+    lean: '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5l9 16H3z"/><path d="M12 10v4.5M12 17.2v.1"/></svg>',
+    wait: '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5.5l3.5 2"/></svg>'
   };
   const NOTE = {
-    buy: "目標価格に届いたか、待つより今のほうが得だと判断しました。Google フライトで便を確認してから購入を。",
+    buy: "目標価格に届いたか、待つより今買うほうが安く済みそうです。Google フライトで便を確認してから購入してください。",
     lean: "そこそこの値段です。目標価格に近づいたら買いましょう。",
-    wait: "今はまだ高めです。目標価格まで下がるのを待つのがおすすめ。下がったら判定は自動で「今買う」に変わります。"
+    wait: "今はまだ高めです。目標価格まで下がるのを待つのがおすすめです。下がったら判定は自動で「今買う」に変わります。"
   };
 
   function showTip(e, html) {
@@ -235,7 +216,7 @@ table.list tr.top-row td { font-weight: 700; }
     .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
     .then(render)
     .catch(err => {
-      app.innerHTML = '<div class="error"><h2>データを読み込めませんでした</h2><p class="sub">少し待ってからページを再読み込みしてください。（' + esc(err.message) + '）</p></div>';
+      app.innerHTML = '<div class="error"><h2>データを読み込めませんでした</h2><p class="desc">少し待ってからページを再読み込みしてください。（' + esc(err.message) + '）</p></div>';
     });
 
   let charts = [];
@@ -244,154 +225,148 @@ table.list tr.top-row td { font-weight: 700; }
     const prev = checks.length >= 2 ? checks[checks.length - 2] : null;
     const diff = prev ? D.price - prev.best_price : null;
     const diffPct = prev ? diff / prev.best_price * 100 : null;
-    const deltaHtml = prev == null ? '<span class="delta flat">前回のデータなし</span>'
+    const deltaHtml = prev == null ? '<span class="delta flat">前回のデータはまだありません</span>'
       : diff === 0 ? '<span class="delta flat">前回（' + esc(prev.fetched_at.slice(5)) + '）と同じ</span>'
-      : '<span class="delta ' + (diff > 0 ? "up" : "down") + '">前回より ' + (diff > 0 ? "▲ " : "▼ ") + yen(Math.abs(diff)) + "（" + (diff > 0 ? "+" : "−") + Math.abs(diffPct).toFixed(1) + "%）</span>";
+      : '<span class="delta ' + (diff > 0 ? "up" : "down") + '">前回より ' + yen(Math.abs(diff)) + (diff > 0 ? " 値上がり" : " 値下がり") + "（" + (diff > 0 ? "+" : "−") + Math.abs(diffPct).toFixed(1) + "%）</span>";
     const tone = D.tone || "wait";
     const verdictShort = D.verdict.replace(/（.*）/, "");
     const b = D.best;
-    const origins = D.route.origin.map(c => AIRPORT[c] || c).join("・");
+    const place = cs => cs.map(c => (AIRPORT[c] || c) + "（" + c + "）").join("・");
     const toTarget = D.price - D.target;
-
     let monthDur = (D.months[0] || {}).duration;
 
     app.innerHTML = `
-      <div class="top">
-        <h1>東京 ⇄ クアラルンプール 航空券ウォッチ</h1>
-        <div class="updated">最終チェック <b class="num">${esc(D.fetched_at)}</b>（ページを再読み込みすると最新になります）</div>
-      </div>
+      <header class="page-head">
+        <h1>東京⇄クアラルンプール 航空券ウォッチ</h1>
+        <p class="updated">最終チェック <span class="num">${esc(D.fetched_at)}</span>。ページを再読み込みすると最新の結果になります。</p>
+      </header>
 
-      <section class="pass" aria-label="今の判定">
-        <div class="pass-main">
-          <div class="verdict ${tone}">${ICON[tone]}${esc(verdictShort)}</div>
+      <section class="section" aria-labelledby="h-now">
+        <h2 id="h-now" hidden>今の判定</h2>
+        <div class="summary">
           <div>
-            <div class="price-label">今いちばん安い往復（大人1名・エコノミー）</div>
-            <div class="price">${yen(D.price)}</div>
-            ${deltaHtml}
+            <div class="status ${tone}" role="status">${ICON[tone]}
+              <div class="status-body"><span class="status-label">判定：${esc(verdictShort)}</span><span class="status-note">${NOTE[tone]}</span></div>
+            </div>
+            <div class="price-block">
+              <span class="price-label">今いちばん安い往復（大人1名・エコノミー）</span>
+              <span class="price num">${yen(D.price)}</span>
+              ${deltaHtml}
+            </div>
           </div>
-          <div class="route">
-            <div class="iata">${esc(D.route.origin.join("/"))}<small>${esc(origins)}</small></div>
-            <div class="plane">${ICON.plane}</div>
-            <div class="iata">${esc(D.route.destination.join("/"))}<small>${esc(D.route.destination.map(c => AIRPORT[c] || c).join("・"))}</small></div>
+          <div>
+            <dl class="facts">
+              <dt>目標価格</dt><dd class="num">${yen(D.target)} 以下なら買い</dd>
+              <dt>行き</dt><dd>${md(b.out)} ${esc(place(D.route.origin))} 発</dd>
+              <dt>帰り</dt><dd>${md(b.ret)} ${esc(place(D.route.destination))} 発</dd>
+              <dt>航空会社</dt><dd>${esc(b.airline)}</dd>
+              <dt>経路</dt><dd>${esc(b.route || "—")}</dd>
+              <dt>出発まで</dt><dd class="num">${D.days_left} 日</dd>
+            </dl>
+            <a class="btn" href="${esc(D.link)}" target="_blank" rel="noopener">Google フライトでこの日程を見る</a>
           </div>
-          <div class="fields">
-            <div class="field"><label>行き</label><div>${md(b.out)}</div></div>
-            <div class="field"><label>帰り</label><div>${md(b.ret)}</div></div>
-            <div class="field"><label>航空会社</label><div>${esc(b.airline)}</div></div>
-            <div class="field"><label>経路</label><div>${esc(b.route || "—")}</div></div>
-            <div class="field"><label>出発まで</label><div><span class="num">${D.days_left}</span> 日</div></div>
-          </div>
-        </div>
-        <div class="pass-stub">
-          <div class="price-label">目標価格（これ以下なら即買い）</div>
-          <div class="num" style="font-size:30px;font-weight:700;color:var(--target);line-height:1">${yen(D.target)}</div>
-          <div class="verdict-note">${NOTE[tone]}</div>
-          <a class="btn" href="${esc(D.link)}" target="_blank" rel="noopener">Google フライトで見る ↗</a>
         </div>
       </section>
 
-      <section class="card" aria-label="目標価格までの距離">
-        <div class="card-head">
-          <h2>今の値段は高い？安い？</h2>
-          <div class="sub">緑の帯は、この時期のこの路線の「ふつうの値段」の範囲（Google フライト調べ）。</div>
+      <section class="section" aria-labelledby="h-range">
+        <div class="section-head">
+          <h2 id="h-range">今の値段は高いか、安いか</h2>
+          <p class="desc">青い帯は、この時期のこの路線の「ふつうの値段」の範囲です（Google フライト調べ）。</p>
         </div>
         <div class="range" id="range"></div>
-        <div class="gap-note">${toTarget > 0
-          ? `目標価格まで、あと <b>${yen(toTarget)}</b> 下がれば買い時。下がるとしたら <b>${yen(D.pred_low)}</b> 前後、うまくいけば <b>${yen(D.pred_lucky)}</b> まで。`
-          : `目標価格を <b>${yen(-toTarget)}</b> 下回っています。買い時です。`}</div>
+        <p>${toTarget > 0
+          ? `目標価格まで、あと <b class="num">${yen(toTarget)}</b> 下がれば買い時です。下がるとしたら <span class="num">${yen(D.pred_low)}</span> 前後、うまくいけば <span class="num">${yen(D.pred_lucky)}</span> まで下がる見込みです。`
+          : `目標価格を <b class="num">${yen(-toTarget)}</b> 下回っています。買い時です。`}</p>
       </section>
 
-      <div class="grid2">
-        <section class="card">
-          <div class="card-head">
-            <h2>この日程の値段の動き（直近60日）</h2>
-            <div class="sub">${md(b.out)}→${md(b.ret)} の最安値の推移</div>
+      <div class="cols-wrap"><div class="cols">
+        <section class="section" aria-labelledby="h-g">
+          <div class="section-head">
+            <h2 id="h-g">この日程の値段の動き（直近60日）</h2>
+            <p class="desc">${md(b.out)}→${md(b.ret)} の最安値の推移。${D.trend.chg7 != null ? "この1週間で " + (D.trend.chg7 > 0 ? "+" : "") + D.trend.chg7.toFixed(0) + "%。" : ""}</p>
           </div>
-          <div class="legend"><span><i class="sw" style="background:var(--series)"></i>その日の最安値</span><span><i class="sw dash"></i>目標価格 ${yen(D.target)}</span></div>
-          <div class="chart-box"><canvas id="c-google" aria-label="直近60日の値段の推移"></canvas></div>
-          <div class="sub">${D.trend.chg7 != null ? "この1週間で <b>" + (D.trend.chg7 > 0 ? "+" : "") + D.trend.chg7.toFixed(0) + "%</b>。" : ""}60日間の最安 ${yen(D.trend.g_min)} ／ 最高 ${yen(D.trend.g_max)}</div>
+          <div class="legend"><span><i class="sw"></i>その日の最安値</span><span><i class="sw dash"></i>目標価格 ${yen(D.target)}</span></div>
+          <div class="chart-box"><canvas id="c-google" role="img" aria-label="直近60日の値段の推移。最安 ${yen(D.trend.g_min)}、最高 ${yen(D.trend.g_max)}"></canvas></div>
         </section>
-        <section class="card">
-          <div class="card-head">
-            <h2>チェックごとの最安値</h2>
-            <div class="sub">このツールがチェックした回ごとの、期間内でいちばん安い値段</div>
+        <section class="section" aria-labelledby="h-c">
+          <div class="section-head">
+            <h2 id="h-c">チェックごとの最安値</h2>
+            <p class="desc">このツールがチェックした回ごとの、期間内でいちばん安い値段。現在 ${checks.length} 回分です。</p>
           </div>
-          <div class="legend"><span><i class="sw" style="background:var(--series)"></i>最安値</span><span><i class="sw dash"></i>その回の目標価格</span></div>
-          <div class="chart-box"><canvas id="c-checks" aria-label="チェックごとの最安値"></canvas></div>
-          <div class="sub">チェック ${checks.length} 回分。回数が増えるほど流れが見えてきます。</div>
+          <div class="legend"><span><i class="sw"></i>最安値</span><span><i class="sw dash"></i>その回の目標価格</span></div>
+          <div class="chart-box"><canvas id="c-checks" role="img" aria-label="チェックごとの最安値の推移"></canvas></div>
         </section>
-      </div>
+      </div></div>
 
-      <section class="card">
-        <div class="card-head">
-          <h2>日付ごとの値段カレンダー</h2>
-          <div class="sub">横が行きの日、縦が旅の長さ。上の色見本のとおり、右側の色ほど高い。数字は千円単位（例：79 = 約7.9万円）。マスにカーソルを合わせると詳しい値段が出ます。</div>
+      <section class="section" aria-labelledby="h-heat">
+        <div class="section-head">
+          <h2 id="h-heat">日付ごとの値段</h2>
+          <p class="desc">横が行きの日、縦が旅の長さです。数字は千円単位（79 は約7.9万円）で、色が濃いほど高くなります。マスにカーソルを合わせると正確な値段が出ます。</p>
         </div>
         <div class="heat-legend">
           <span>安い</span><span class="ramp">${[0,1,2,3,4,5].map(i => `<i style="background:var(--seq-${i})"></i>`).join("")}</span><span>高い</span>
           <span class="bestkey"><i></i>今の最安の日程</span>
         </div>
-        <div class="heat-scroll"><table class="heat" id="heat"></table></div>
+        <div class="scroll-x"><table class="heat" id="heat"></table></div>
       </section>
 
-      <div class="grid2">
-        <section class="card">
-          <div class="card-head">
-            <h2>ほかの時期と比べると</h2>
-            <div class="sub">各時期でいちばん安い往復。年末はどうしても高くなります。</div>
+      <div class="cols-wrap"><div class="cols">
+        <section class="section" aria-labelledby="h-m">
+          <div class="section-head">
+            <h2 id="h-m">ほかの時期との比較</h2>
+            <p class="desc">各時期でいちばん安い往復の値段です。</p>
           </div>
           <div class="seg" role="group" aria-label="旅の長さ" id="seg">${D.months.map(m => `<button type="button" id="seg-${m.duration}" data-d="${m.duration}" aria-pressed="${m.duration === monthDur}">${m.duration}泊${m.duration + 1}日</button>`).join("")}</div>
-          <div class="mbars" id="mbars"></div>
+          <div class="scroll-x"><table class="list" id="mtable"></table></div>
         </section>
-        <section class="card">
-          <div class="card-head">
-            <h2>この判定の理由</h2>
-            <div class="sub">判定スコア <span class="num">${D.score > 0 ? "+" : ""}${D.score.toFixed(1)}</span>（＋が大きいほど「今買う」寄り）</div>
+        <section class="section" aria-labelledby="h-r">
+          <div class="section-head">
+            <h2 id="h-r">判定の理由</h2>
+            <p class="desc">判定スコア <span class="num">${D.score > 0 ? "+" : ""}${D.score.toFixed(1)}</span>。プラスが大きいほど「今買う」寄りです。</p>
           </div>
-          <ul class="reasons">${D.reasons.map(r => `<li>${ICON.dot.replace("<svg", '<svg style="color:var(--accent)"')}<span>${esc(r)}</span></li>`).join("")}</ul>
+          <ul class="reasons">${D.reasons.map(r => `<li>${esc(r)}</li>`).join("")}</ul>
         </section>
-      </div>
+      </div></div>
 
-      <section class="card">
-        <div class="card-head">
-          <h2>${md(b.out)}→${md(b.ret)} の便</h2>
-          <div class="sub">安い順。LCC（ベトジェット、スクート、エアアジアなど）は預け荷物や座席指定が別料金のことが多いので注意。</div>
+      <section class="section" aria-labelledby="h-f">
+        <div class="section-head">
+          <h2 id="h-f">${md(b.out)}→${md(b.ret)} の便</h2>
+          <p class="desc">安い順です。LCC（ベトジェット、スクート、エアアジアなど）は預け荷物や座席指定が別料金のことが多いので注意してください。</p>
         </div>
-        <div class="tbl-scroll"><table class="list">
+        <div class="scroll-x"><table class="list">
           <thead><tr><th>航空会社</th><th>経路</th><th>便名</th><th>乗継</th><th class="r">所要時間</th><th class="r">往復の値段</th></tr></thead>
-          <tbody>${D.flights.map((f, i) => `<tr class="${i === 0 ? "top-row" : ""}"><td>${esc(f.airline)}</td><td>${esc(f.route)}</td><td class="muted">${esc(f.flights)}</td><td>${f.stops === 0 ? '<span class="pill direct">直行</span>' : '<span class="pill">' + f.stops + '回</span>'}</td><td class="r num">${hm(f.minutes)}</td><td class="r num">${yen(f.price)}</td></tr>`).join("")}</tbody>
+          <tbody>${D.flights.map(f => `<tr><td>${esc(f.airline)}</td><td>${esc(f.route)}</td><td class="mono">${esc(f.flights)}</td><td>${f.stops === 0 ? "直行" : f.stops + "回"}</td><td class="r num">${hm(f.minutes)}</td><td class="r num">${yen(f.price)}</td></tr>`).join("")}</tbody>
         </table></div>
       </section>
 
-      <section class="card">
-        <div class="card-head"><h2>チェック履歴</h2><div class="sub">新しい順</div></div>
-        <div class="tbl-scroll"><table class="list">
+      <section class="section" aria-labelledby="h-h">
+        <div class="section-head"><h2 id="h-h">チェック履歴</h2><p class="desc">新しい順です。</p></div>
+        <div class="scroll-x"><table class="list">
           <thead><tr><th>チェック日時</th><th>最安の日程</th><th>航空会社</th><th class="r">最安値</th><th class="r">前回比</th><th class="r">目標価格</th><th>判定</th></tr></thead>
           <tbody>${checks.map((h, i) => {
             const p = i > 0 ? checks[i - 1] : null;
             const d = p ? h.best_price - p.best_price : null;
-            const dc = d == null ? '<span class="muted">—</span>' : d === 0 ? '<span class="muted">±0</span>' : `<span class="delta ${d > 0 ? "up" : "down"}">${d > 0 ? "+" : "−"}${yen(Math.abs(d)).slice(1)}</span>`;
+            const dc = d == null ? "—" : d === 0 ? "±0" : `<span class="delta ${d > 0 ? "up" : "down"}">${d > 0 ? "+" : "−"}${yen(Math.abs(d)).slice(1)}</span>`;
             return `<tr><td class="num">${esc(h.fetched_at)}</td><td>${md(h.best_out)}→${md(h.best_ret)}</td><td>${esc(h.airline)}</td><td class="r num">${yen(h.best_price)}</td><td class="r num">${dc}</td><td class="r num">${yen(h.target)}</td><td>${esc(String(h.verdict).replace(/（.*）/, ""))}</td></tr>`;
           }).reverse().join("")}</tbody>
         </table></div>
       </section>
 
-      <div class="foot">
-        <div>条件：${esc(D.window[0].slice(5).replace("-", "/"))}〜${esc(D.window[1].slice(5).replace("-", "/"))} の中で ${esc(D.trip[0])}〜${esc(D.trip[1])}／大人1名・エコノミー・乗継OK。値段は Google フライト上の最安販売サイトの値段です。</div>
-        <div>「下がるとしたら」は過去の値動きから出した目安で、保証ではありません。購入は Google フライトから各自で。</div>
-      </div>`;
+      <footer class="foot">
+        <p>条件：${esc(D.window[0].slice(5).replace("-", "/"))}〜${esc(D.window[1].slice(5).replace("-", "/"))} の間で ${esc(D.trip[0])}〜${esc(D.trip[1])}、大人1名・エコノミー・乗継あり。値段は Google フライト上の最安販売サイトの値段です。</p>
+        <p>「下がるとしたら」は過去の値動きから出した目安で、保証ではありません。購入は Google フライトから各自で行ってください。</p>
+      </footer>`;
 
     renderRange(D);
     renderHeat(D);
     const seg = document.getElementById("seg");
-    const drawMonths = () => renderMonths(D, monthDur);
     seg.addEventListener("click", e => {
       const btn = e.target.closest("button"); if (!btn) return;
       monthDur = Number(btn.dataset.d);
       seg.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", String(x === btn)));
-      drawMonths();
+      renderMonths(D, monthDur);
     });
-    drawMonths();
+    renderMonths(D, monthDur);
     drawCharts(D);
     matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => drawCharts(D));
   }
@@ -406,17 +381,16 @@ table.list tr.top-row td { font-weight: 700; }
     let html = '<div class="range-track"></div>';
     if (t.low != null) {
       html += `<div class="range-band" style="left:${x(t.low)};width:calc(${x(t.high)} - ${x(t.low)})"></div>`;
-      html += `<div class="range-band-label" style="left:${x((t.low + t.high) / 2)}">ふつうの値段 ${yen(t.low)}〜${yen(t.high)}</div>`;
+      html += `<div class="range-band-label num" style="left:${x((t.low + t.high) / 2)}">ふつうの値段 ${yen(t.low)}〜${yen(t.high)}</div>`;
     }
-    // 目盛り（1万円ごと、端は除く）
     for (let v = lo + 10000; v < hi; v += 10000) {
       if ((v / 10000) % 2 === 0) html += `<div class="scale num" style="left:${x(v)}">${v / 10000}万</div>`;
     }
-    const near = Math.abs(D.price - D.target) / (hi - lo) < 0.12;
-    html += `<div class="mark target" style="left:${x(D.target)}${near ? ";top:0" : ""}"><span class="tag">目標 ${yen(D.target)}</span><span class="tick"></span></div>`;
-    html += `<div class="mark now" style="left:${x(D.price)}${near ? ";top:-26px" : ""}"><span class="tag">今 ${yen(D.price)}</span><span class="tick"${near ? ' style="height:48px"' : ""}></span></div>`;
+    const near = Math.abs(D.price - D.target) / (hi - lo) < 0.14;
+    html += `<div class="mark target" style="left:${x(D.target)}"><span class="tag num">目標 ${yen(D.target)}</span><span class="tick"></span></div>`;
+    html += `<div class="mark now" style="left:${x(D.price)}${near ? ";top:-32px" : ""}"><span class="tag num">今 ${yen(D.price)}</span><span class="tick"${near ? ' style="height:54px"' : ""}></span></div>`;
     el.innerHTML = html;
-    if (near) el.style.marginTop = "30px";
+    if (near) el.style.marginTop = "32px";
   }
 
   function renderHeat(D) {
@@ -427,17 +401,18 @@ table.list tr.top-row td { font-weight: 700; }
     const cols = D.calendar[0].cells.map(c => c.out);
     let html = "<thead><tr><th></th>" + cols.map(o => {
       const d = pd(o); const w = d.getDay();
-      return `<th class="${w === 6 ? "dow-sat" : w === 0 ? "dow-sun" : ""}">${d.getMonth() + 1}/${d.getDate()}<br>${DOW[w]}</th>`;
+      return `<th class="${w === 6 ? "sat" : w === 0 ? "sun" : ""}"><span class="num">${d.getMonth() + 1}/${d.getDate()}</span><br>${DOW[w]}</th>`;
     }).join("") + "</tr></thead><tbody>";
     D.calendar.forEach(row => {
       const byOut = Object.fromEntries(row.cells.map(c => [c.out, c]));
-      html += `<tr><th class="row">${esc(row.label)}</th>` + cols.map(o => {
+      html += `<tr><th class="row" scope="row">${esc(row.label)}</th>` + cols.map(o => {
         const c = byOut[o];
-        if (!c || c.price == null) return '<td style="background:var(--grid)" aria-label="データなし"></td>';
+        if (!c || c.price == null) return '<td style="background:var(--surface-subtle)" aria-label="データなし"></td>';
         const s = step(c.price);
         const best = c.out === D.best.out && c.ret === D.best.ret;
         const ink = s >= 3 ? "var(--seq-ink)" : "var(--ink)";
-        return `<td class="${best ? "best" : ""}" style="background:var(--seq-${s});color:${ink}" data-tip="${esc(md(c.out) + " → " + md(c.ret) + "<br><b>" + yen(c.price) + "</b>" + (best ? "（今の最安）" : ""))}">${Math.round(c.price / 1000)}</td>`;
+        const label = md(c.out) + "→" + md(c.ret) + " " + yen(c.price) + (best ? "（今の最安）" : "");
+        return `<td class="num${best ? " best" : ""}" style="background:var(--seq-${s});color:${ink}" aria-label="${esc(label)}" data-tip="${esc(md(c.out) + " → " + md(c.ret) + "<br><b>" + yen(c.price) + "</b>" + (best ? "（今の最安）" : ""))}">${Math.round(c.price / 1000)}</td>`;
       }).join("") + "</tr>";
     });
     el.innerHTML = html + "</tbody>";
@@ -447,22 +422,22 @@ table.list tr.top-row td { font-weight: 700; }
 
   function renderMonths(D, dur) {
     const m = D.months.find(x => x.duration === dur) || D.months[0];
-    const el = document.getElementById("mbars");
-    if (!m) { el.innerHTML = '<p class="muted">データなし</p>'; return; }
+    const el = document.getElementById("mtable");
+    if (!m) { el.innerHTML = "<tr><td>データなし</td></tr>"; return; }
     const mx = Math.max(...m.rows.map(r => r.min));
-    el.innerHTML = m.rows.map(r => {
-      const here = r.month === "希望期間";
-      return `<div class="mbar"><div class="name ${here ? "here" : ""}">${here ? "今回の期間" : esc(r.month)}</div>
-        <div class="track"><div class="fill ${here ? "here" : ""}" style="width:${(r.min / mx * 72).toFixed(1)}%"></div>
-        <div class="val num" style="left:${(r.min / mx * 72).toFixed(1)}%">${yen(r.min)} <span class="muted" style="font-weight:500">中央値 ${yen(r.median)}</span></div></div></div>`;
-    }).join("");
+    el.innerHTML = "<thead><tr><th>時期</th><th class=\"r\">最安値</th><th class=\"r\">中央値</th><th><span hidden>グラフ</span></th></tr></thead><tbody>" +
+      m.rows.map(r => {
+        const here = r.month === "希望期間";
+        return `<tr><td>${here ? "<b>今回の期間</b>" : esc(r.month)}</td><td class="r num">${here ? "<b>" + yen(r.min) + "</b>" : yen(r.min)}</td><td class="r num">${yen(r.median)}</td><td class="bar" aria-hidden="true"><i class="${here ? "here" : ""}" style="width:${(r.min / mx * 100).toFixed(1)}%"></i></td></tr>`;
+      }).join("") + "</tbody>";
   }
 
   function drawCharts(D) {
     if (!window.Chart) return;
     charts.forEach(c => c.destroy()); charts = [];
-    const ink2 = css("--ink-2"), grid = css("--grid"), series = css("--series"), target = css("--target"), surface = css("--surface"), ink = css("--ink");
-    Chart.defaults.font.family = css("--font-num");
+    const ink = css("--ink"), ink2 = css("--ink-2"), line = css("--line"), key = css("--key"), bg = css("--bg");
+    Chart.defaults.font.family = css("--font");
+    Chart.defaults.font.size = 14;
     Chart.defaults.color = ink2;
     const base = {
       responsive: true, maintainAspectRatio: false, animation: false,
@@ -470,13 +445,14 @@ table.list tr.top-row td { font-weight: 700; }
       plugins: {
         legend: { display: false },
         tooltip: {
-          backgroundColor: ink, titleColor: surface, bodyColor: surface, displayColors: false, padding: 10,
+          backgroundColor: ink, titleColor: bg, bodyColor: bg, displayColors: false, padding: 12, cornerRadius: 4,
+          titleFont: { size: 14 }, bodyFont: { size: 14 },
           callbacks: { label: c => c.dataset.label + " " + yen(c.parsed.y) }
         }
       },
       scales: {
-        x: { grid: { display: false }, ticks: { maxRotation: 0, autoSkipPadding: 14 }, border: { color: grid } },
-        y: { grid: { color: grid }, border: { display: false }, ticks: { callback: v => (v / 10000).toFixed(1) + "万" } }
+        x: { grid: { display: false }, ticks: { maxRotation: 0, autoSkipPadding: 16 }, border: { color: line } },
+        y: { grid: { color: line }, border: { display: false }, ticks: { callback: v => (v / 10000).toFixed(1) + "万" } }
       }
     };
     const gh = D.google_history || [];
@@ -486,8 +462,8 @@ table.list tr.top-row td { font-weight: 700; }
         data: {
           labels: gh.map(p => mdShort(p[0])),
           datasets: [
-            { label: "最安値", data: gh.map(p => p[1]), borderColor: series, backgroundColor: series + "22", fill: true, borderWidth: 2, pointRadius: gh.map((_, i) => i === gh.length - 1 ? 5 : 0), pointBackgroundColor: series, pointBorderColor: surface, pointBorderWidth: 2, tension: .25 },
-            { label: "目標価格", data: gh.map(() => D.target), borderColor: target, borderDash: [5, 4], borderWidth: 1.5, pointRadius: 0, fill: false }
+            { label: "最安値", data: gh.map(p => p[1]), borderColor: key, borderWidth: 2, pointRadius: gh.map((_, i) => i === gh.length - 1 ? 5 : 0), pointBackgroundColor: key, pointBorderColor: bg, pointBorderWidth: 2, tension: 0 },
+            { label: "目標価格", data: gh.map(() => D.target), borderColor: ink2, borderDash: [6, 4], borderWidth: 1.5, pointRadius: 0 }
           ]
         },
         options: base
@@ -499,8 +475,8 @@ table.list tr.top-row td { font-weight: 700; }
       data: {
         labels: ck.map(h => { const d = pd(h.fetched_at); return (d.getMonth() + 1) + "/" + d.getDate() + " " + h.fetched_at.slice(11, 16); }),
         datasets: [
-          { label: "最安値", data: ck.map(h => h.best_price), borderColor: series, backgroundColor: series, borderWidth: 2, pointRadius: 5, pointHoverRadius: 7, pointBorderColor: surface, pointBorderWidth: 2, tension: 0 },
-          { label: "目標価格", data: ck.map(h => h.target), borderColor: target, borderDash: [5, 4], borderWidth: 1.5, pointRadius: 0, stepped: true }
+          { label: "最安値", data: ck.map(h => h.best_price), borderColor: key, backgroundColor: key, borderWidth: 2, pointRadius: 5, pointHoverRadius: 7, pointBorderColor: bg, pointBorderWidth: 2, tension: 0 },
+          { label: "目標価格", data: ck.map(h => h.target), borderColor: ink2, borderDash: [6, 4], borderWidth: 1.5, pointRadius: 0, stepped: true }
         ]
       },
       options: { ...base, scales: { ...base.scales, y: { ...base.scales.y, suggestedMin: Math.min(...ck.map(h => h.target)) * 0.9 } } }
