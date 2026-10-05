@@ -101,6 +101,14 @@ dl.facts dt { color: var(--ink-2); padding-right: var(--s3); white-space: nowrap
 dl.facts dd { font-weight: 700; min-width: 0; }
 .btn { display: inline-flex; justify-content: center; align-items: center; min-height: 48px; padding: 0 var(--s3); background: var(--key); color: var(--on-key); font-weight: 700; border-radius: 8px; text-decoration: underline; text-underline-offset: 3px; margin-top: var(--s3); }
 .btn:hover { background: var(--key-strong); }
+.btn-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s1) var(--s3); margin-top: var(--s3); }
+.btn-row .btn { margin-top: 0; }
+.heat td a { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; color: inherit; text-decoration: none; }
+.heat td a:hover { text-decoration: underline; }
+tr[data-href] { cursor: pointer; }
+tr[data-href]:hover td { background: var(--key-soft); }
+.go { white-space: nowrap; }
+.click-note { color: var(--ink-2); font-size: 14px; }
 
 /* range bar */
 .range { position: relative; height: 104px; margin: 0 var(--s4); min-width: 400px; }
@@ -266,7 +274,10 @@ table.list td.bar { width: 40%; min-width: 120px; padding-right: 0; }
               <dt>経路</dt><dd>${esc(b.route || "—")}</dd>
               <dt>出発まで</dt><dd class="num">${D.days_left} 日</dd>
             </dl>
-            <a class="btn" href="${esc(D.link)}" target="_blank" rel="noopener">Google フライトでこの日程を見る</a>
+            <div class="btn-row">
+              <a class="btn" href="${esc(D.flight_link || D.link)}" target="_blank" rel="noopener">この便を Google フライトで見る</a>
+              <a href="${esc(D.link)}" target="_blank" rel="noopener">同じ日付のほかの便を見る</a>
+            </div>
           </div>
         </div>
       </section>
@@ -289,6 +300,7 @@ table.list td.bar { width: 40%; min-width: 120px; padding-right: 0; }
             <p class="desc">${md(b.out)}→${md(b.ret)} の最安値の推移。${D.trend.chg7 != null ? "この1週間で " + (D.trend.chg7 > 0 ? "+" : "") + D.trend.chg7.toFixed(0) + "%。" : ""}</p>
           </div>
           <div class="legend"><span><i class="sw"></i>その日の最安値</span><span><i class="sw dash"></i>目標価格 ${yen(D.target)}</span></div>
+          <p class="click-note">グラフをクリックすると、この日程の最安便を選んだ状態で Google フライトが開きます。</p>
           <p class="scroll-hint">横にスクロールすると続きが見られます</p>
           <div class="scroll-x"><div class="chart-box"><canvas id="c-google" role="img" aria-label="直近60日の値段の推移。最安 ${yen(D.trend.g_min)}、最高 ${yen(D.trend.g_max)}"></canvas></div></div>
         </section>
@@ -298,6 +310,7 @@ table.list td.bar { width: 40%; min-width: 120px; padding-right: 0; }
             <p class="desc">このツールがチェックした回ごとの、期間内でいちばん安い値段。現在 ${checks.length} 回分です。</p>
           </div>
           <div class="legend"><span><i class="sw"></i>最安値</span><span><i class="sw dash"></i>その回の目標価格</span></div>
+          <p class="click-note">点をクリックすると、その回の最安日程の Google フライトが開きます。</p>
           <p class="scroll-hint">横にスクロールすると続きが見られます</p>
           <div class="scroll-x"><div class="chart-box"><canvas id="c-checks" role="img" aria-label="チェックごとの最安値の推移"></canvas></div></div>
         </section>
@@ -306,7 +319,7 @@ table.list td.bar { width: 40%; min-width: 120px; padding-right: 0; }
       <section class="section" aria-labelledby="h-heat">
         <div class="section-head">
           <h2 id="h-heat">日付ごとの値段</h2>
-          <p class="desc">横が行きの日、縦が旅の長さです。数字は千円単位（79 は約7.9万円）で、色が濃いほど高くなります。マスにカーソルを合わせると正確な値段が出ます。</p>
+          <p class="desc">横が行きの日、縦が旅の長さです。数字は千円単位（79 は約7.9万円）で、色が濃いほど高くなります。マスにカーソルを合わせると正確な値段が出て、クリックするとその日程の Google フライトが開きます。</p>
         </div>
         <div class="heat-legend">
           <span>安い</span><span class="ramp">${[0,1,2,3,4,5].map(i => `<i style="background:var(--seq-${i})"></i>`).join("")}</span><span>高い</span>
@@ -339,8 +352,8 @@ table.list td.bar { width: 40%; min-width: 120px; padding-right: 0; }
           <p class="desc">安い順です。LCC（ベトジェット、スクート、エアアジアなど）は預け荷物や座席指定が別料金のことが多いので注意してください。</p>
         </div>
         <div class="scroll-x"><table class="list">
-          <thead><tr><th>航空会社</th><th>経路</th><th>便名</th><th>乗継</th><th class="r">所要時間</th><th class="r">往復の値段</th></tr></thead>
-          <tbody>${D.flights.map(f => `<tr><td>${esc(f.airline)}</td><td>${esc(f.route)}</td><td class="mono">${esc(f.flights)}</td><td>${f.stops === 0 ? "直行" : f.stops + "回"}</td><td class="r num">${hm(f.minutes)}</td><td class="r num">${yen(f.price)}</td></tr>`).join("")}</tbody>
+          <thead><tr><th>航空会社</th><th>経路</th><th>便名</th><th>乗継</th><th class="r">所要時間</th><th class="r">往復の値段</th><th><span hidden>リンク</span></th></tr></thead>
+          <tbody>${D.flights.map(f => `<tr data-href="${esc(f.link || D.link)}"><td><a href="${esc(f.link || D.link)}" target="_blank" rel="noopener">${esc(f.airline)}</a></td><td>${esc(f.route)}</td><td class="mono">${esc(f.flights)}</td><td>${f.stops === 0 ? "直行" : f.stops + "回"}</td><td class="r num">${hm(f.minutes)}</td><td class="r num">${yen(f.price)}</td><td><a class="go" href="${esc(f.link || D.link)}" target="_blank" rel="noopener">この便を見る</a></td></tr>`).join("")}</tbody>
         </table></div>
       </section>
 
@@ -352,12 +365,13 @@ table.list td.bar { width: 40%; min-width: 120px; padding-right: 0; }
             const p = i > 0 ? checks[i - 1] : null;
             const d = p ? h.best_price - p.best_price : null;
             const dc = d == null ? "—" : d === 0 ? "±0" : `<span class="delta ${d > 0 ? "up" : "down"}">${d > 0 ? "+" : "−"}${yen(Math.abs(d)).slice(1)}</span>`;
-            return `<tr><td class="num">${esc(h.fetched_at)}</td><td>${md(h.best_out)}→${md(h.best_ret)}</td><td>${esc(h.airline)}</td><td class="r num">${yen(h.best_price)}</td><td class="r num">${dc}</td><td class="r num">${yen(h.target)}</td><td>${esc(String(h.verdict).replace(/（.*）/, ""))}</td></tr>`;
+            return `<tr data-href="${esc(h.link || "")}"><td class="num">${esc(h.fetched_at)}</td><td>${h.link ? `<a href="${esc(h.link)}" target="_blank" rel="noopener">${md(h.best_out)}→${md(h.best_ret)}</a>` : md(h.best_out) + "→" + md(h.best_ret)}</td><td>${esc(h.airline)}</td><td class="r num">${yen(h.best_price)}</td><td class="r num">${dc}</td><td class="r num">${yen(h.target)}</td><td>${esc(String(h.verdict).replace(/（.*）/, ""))}</td></tr>`;
           }).reverse().join("")}</tbody>
         </table></div>
       </section>
 
       <footer class="foot">
+        <p>表の行、カレンダーのマス、グラフの点をクリックすると、その航空券の Google フライトが開きます。便がわかっているところ（便の一覧など）は、往路の便を選んだ状態で開きます。</p>
         <p>条件：${esc(D.window[0].slice(5).replace("-", "/"))}〜${esc(D.window[1].slice(5).replace("-", "/"))} の間で ${esc(D.trip[0])}〜${esc(D.trip[1])}、大人1名・エコノミー・乗継あり。値段は Google フライト上の最安販売サイトの値段です。</p>
         <p>「下がるとしたら」は過去の値動きから出した目安で、保証ではありません。購入は Google フライトから各自で行ってください。</p>
       </footer>`;
@@ -372,6 +386,11 @@ table.list td.bar { width: 40%; min-width: 120px; padding-right: 0; }
       renderMonths(D, monthDur);
     });
     renderMonths(D, monthDur);
+    app.addEventListener("click", e => {
+      if (e.target.closest("a, button")) return;
+      const tr = e.target.closest("tr[data-href]");
+      if (tr && tr.dataset.href) window.open(tr.dataset.href, "_blank", "noopener");
+    });
     drawCharts(D);
     matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => drawCharts(D));
   }
@@ -417,7 +436,7 @@ table.list td.bar { width: 40%; min-width: 120px; padding-right: 0; }
         const best = c.out === D.best.out && c.ret === D.best.ret;
         const ink = s >= 3 ? "var(--seq-ink)" : "var(--ink)";
         const label = md(c.out) + "→" + md(c.ret) + " " + yen(c.price) + (best ? "（今の最安）" : "");
-        return `<td class="num${best ? " best" : ""}" style="background:var(--seq-${s});color:${ink}" aria-label="${esc(label)}" data-tip="${esc(md(c.out) + " → " + md(c.ret) + "<br><b>" + yen(c.price) + "</b>" + (best ? "（今の最安）" : ""))}">${Math.round(c.price / 1000)}</td>`;
+        return `<td class="num${best ? " best" : ""}" style="background:var(--seq-${s});color:${ink}" data-tip="${esc(md(c.out) + " → " + md(c.ret) + "<br><b>" + yen(c.price) + "</b>" + (best ? "（今の最安）" : "") + "<br>クリックで Google フライトを開く")}"><a href="${esc(c.link || D.link)}" target="_blank" rel="noopener" aria-label="${esc(label)}（Google フライトで見る）">${Math.round(c.price / 1000)}</a></td>`;
       }).join("") + "</tr>";
     });
     el.innerHTML = html + "</tbody>";
@@ -433,7 +452,9 @@ table.list td.bar { width: 40%; min-width: 120px; padding-right: 0; }
     el.innerHTML = "<thead><tr><th>時期</th><th class=\"r\">最安値</th><th class=\"r\">中央値</th><th><span hidden>グラフ</span></th></tr></thead><tbody>" +
       m.rows.map(r => {
         const here = r.month === "希望期間";
-        return `<tr><td>${here ? "<b>今回の期間</b>" : esc(r.month)}</td><td class="r num">${here ? "<b>" + yen(r.min) + "</b>" : yen(r.min)}</td><td class="r num">${yen(r.median)}</td><td class="bar" aria-hidden="true"><i class="${here ? "here" : ""}" style="width:${(r.min / mx * 100).toFixed(1)}%"></i></td></tr>`;
+        const name = here ? "<b>今回の期間</b>" : esc(r.month);
+        const when = r.out ? `<br><a href="${esc(r.link)}" target="_blank" rel="noopener" class="num">${md(r.out)}→${md(r.ret)}</a>` : "";
+        return `<tr${r.link ? ` data-href="${esc(r.link)}"` : ""}><td>${name}${when}</td><td class="r num">${here ? "<b>" + yen(r.min) + "</b>" : yen(r.min)}</td><td class="r num">${yen(r.median)}</td><td class="bar" aria-hidden="true"><i class="${here ? "here" : ""}" style="width:${(r.min / mx * 100).toFixed(1)}%"></i></td></tr>`;
       }).join("") + "</tbody>";
   }
 
@@ -447,6 +468,7 @@ table.list td.bar { width: 40%; min-width: 120px; padding-right: 0; }
     const base = {
       responsive: true, maintainAspectRatio: false, animation: false,
       interaction: { mode: "index", intersect: false },
+      onHover: (e, els) => { e.native.target.style.cursor = els.length ? "pointer" : "default"; },
       plugins: {
         legend: { display: false },
         tooltip: {
@@ -471,7 +493,7 @@ table.list td.bar { width: 40%; min-width: 120px; padding-right: 0; }
             { label: "目標価格", data: gh.map(() => D.target), borderColor: ink2, borderDash: [6, 4], borderWidth: 1.5, pointRadius: 0 }
           ]
         },
-        options: base
+        options: { ...base, onClick: (e, els) => { if (els.length) window.open(D.flight_link || D.link, "_blank", "noopener"); } }
       }));
     }
     const ck = D.checks || [];
@@ -484,7 +506,7 @@ table.list td.bar { width: 40%; min-width: 120px; padding-right: 0; }
           { label: "目標価格", data: ck.map(h => h.target), borderColor: ink2, borderDash: [6, 4], borderWidth: 1.5, pointRadius: 0, stepped: true }
         ]
       },
-      options: { ...base, scales: { ...base.scales, y: { ...base.scales.y, suggestedMin: Math.min(...ck.map(h => h.target)) * 0.9 } } }
+      options: { ...base, onClick: (e, els) => { const h = els.length && ck[els[0].index]; if (h && h.link) window.open(h.link, "_blank", "noopener"); }, scales: { ...base.scales, y: { ...base.scales.y, suggestedMin: Math.min(...ck.map(h => h.target)) * 0.9 } } }
     }));
   }
 })();
