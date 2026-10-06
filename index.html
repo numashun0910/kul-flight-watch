@@ -59,7 +59,7 @@ body {
   padding-inline: 16px;
   padding-block: max(var(--s3), env(safe-area-inset-top)) max(var(--s5), env(safe-area-inset-bottom));
 }
-.wrap { max-width: 1040px; margin: 0 auto; display: grid; gap: var(--s3); }
+.wrap { max-width: 1040px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s3); }
 .num { font-variant-numeric: tabular-nums; }
 .mono { font-family: var(--mono); letter-spacing: 0; }
 h1, h2 { margin: 0; line-height: 1.4; text-wrap: balance; font-weight: 700; }
@@ -76,7 +76,7 @@ svg.icon { width: 24px; height: 24px; flex: none; fill: none; stroke: currentCol
 .page-head .updated { color: var(--ink-2); }
 
 /* sections: 薄い面の上に、1px 枠・角丸 12px の白い面を置く。はみ出す図表は面の中で横スクロール */
-.section { background: var(--bg); border: 1px solid var(--line); border-radius: 12px; padding: var(--s3); display: grid; gap: var(--s3); min-width: 0; align-content: start; }
+.section { background: var(--bg); border: 1px solid var(--line); border-radius: 12px; padding: var(--s3); display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s3); min-width: 0; align-content: start; }
 .section-head { display: grid; gap: var(--s1); }
 .cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s3); }
 
@@ -125,7 +125,7 @@ tr[data-href]:hover td { background: var(--key-soft); }
 .scale { position: absolute; top: 84px; font-size: 14px; color: var(--ink-3); transform: translateX(-50%); }
 
 /* charts */
-.chart-box { position: relative; height: 260px; min-width: 440px; }
+.chart-box { position: relative; height: 260px; width: 100%; min-width: 0; overflow: hidden; }
 .legend { display: flex; flex-wrap: wrap; gap: var(--s1) var(--s3); color: var(--ink-2); font-size: 14px; }
 .legend span { display: inline-flex; align-items: center; gap: var(--s1); }
 .sw { width: 20px; height: 0; border-top: 2px solid var(--key); display: inline-block; }
@@ -168,6 +168,9 @@ table.list td.bar { width: 40%; min-width: 120px; padding-right: 0; }
 
 #tip { position: fixed; pointer-events: none; z-index: 10; background: var(--ink); color: var(--bg); font-size: 14px; line-height: 1.5; padding: var(--s1) 12px; border-radius: 4px; white-space: nowrap; opacity: 0; }
 
+@media (max-width: 960px) {
+  .cols { grid-template-columns: minmax(0, 1fr); }
+}
 @media (max-width: 760px) {
   h1 { font-size: 24px; }
   .summary, .cols { grid-template-columns: minmax(0, 1fr); }
@@ -301,8 +304,7 @@ table.list td.bar { width: 40%; min-width: 120px; padding-right: 0; }
           </div>
           <div class="legend"><span><i class="sw"></i>その日の最安値</span><span><i class="sw dash"></i>目標価格 ${yen(D.target)}</span></div>
           <p class="click-note">グラフをクリックすると、この日程の最安便を選んだ状態で Google フライトが開きます。</p>
-          <p class="scroll-hint">横にスクロールすると続きが見られます</p>
-          <div class="scroll-x"><div class="chart-box"><canvas id="c-google" role="img" aria-label="直近60日の値段の推移。最安 ${yen(D.trend.g_min)}、最高 ${yen(D.trend.g_max)}"></canvas></div></div>
+          <div class="chart-box"><canvas id="c-google" role="img" aria-label="直近60日の値段の推移。最安 ${yen(D.trend.g_min)}、最高 ${yen(D.trend.g_max)}"></canvas></div>
         </section>
         <section class="section" aria-labelledby="h-c">
           <div class="section-head">
@@ -311,8 +313,7 @@ table.list td.bar { width: 40%; min-width: 120px; padding-right: 0; }
           </div>
           <div class="legend"><span><i class="sw"></i>最安値</span><span><i class="sw dash"></i>その回の目標価格</span></div>
           <p class="click-note">点をクリックすると、その回の最安日程の Google フライトが開きます。</p>
-          <p class="scroll-hint">横にスクロールすると続きが見られます</p>
-          <div class="scroll-x"><div class="chart-box"><canvas id="c-checks" role="img" aria-label="チェックごとの最安値の推移"></canvas></div></div>
+          <div class="chart-box"><canvas id="c-checks" role="img" aria-label="チェックごとの最安値の推移"></canvas></div>
         </section>
       </div>
 
@@ -466,7 +467,7 @@ table.list td.bar { width: 40%; min-width: 120px; padding-right: 0; }
     Chart.defaults.font.size = 14;
     Chart.defaults.color = ink2;
     const base = {
-      responsive: true, maintainAspectRatio: false, animation: false,
+      responsive: true, maintainAspectRatio: false, animation: false, layout: { padding: { right: 12 } },
       interaction: { mode: "index", intersect: false },
       onHover: (e, els) => { e.native.target.style.cursor = els.length ? "pointer" : "default"; },
       plugins: {
@@ -478,7 +479,7 @@ table.list td.bar { width: 40%; min-width: 120px; padding-right: 0; }
         }
       },
       scales: {
-        x: { grid: { display: false }, ticks: { maxRotation: 0, autoSkipPadding: 16 }, border: { color: line } },
+        x: { grid: { display: false }, ticks: { maxRotation: 0, autoSkip: true, autoSkipPadding: 16, maxTicksLimit: 7 }, border: { color: line } },
         y: { grid: { color: line }, border: { display: false }, ticks: { callback: v => (v / 10000).toFixed(1) + "万" } }
       }
     };
