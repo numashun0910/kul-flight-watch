@@ -1,5 +1,5 @@
 {
- "fetched_at": "2026-11-03 21:08",
+ "fetched_at": "2026-11-04 09:16",
  "route": {
   "origin": [
    "NRT",
@@ -21,18 +21,18 @@
  "tone": "buy",
  "score": 4.0,
  "price": 60924.0,
- "days_left": 40,
+ "days_left": 39,
  "best": {
   "out": "2026-12-13",
   "ret": "2026-12-15",
   "airline": "スクート",
   "route": "HND → SIN → KUL",
-  "flights": "TR805 / TR456",
+  "flights": "TR805 / TR468",
   "stops": 1,
-  "minutes": 1720
+  "minutes": 1020
  },
  "link": "https://www.google.com/travel/flights/search?tfs=GiESCjIwMjYtMTItMTNqBRIDTlJUagUSA0hORHIFEgNLVUwaIRIKMjAyNi0xMi0xNWoFEgNLVUxyBRIDTlJUcgUSA0hOREABSAGYAQE&curr=JPY&hl=ja&gl=JP",
- "flight_link": "https://www.google.com/travel/flights/search?tfs=GlwSCjIwMjYtMTItMTMiHwoDSE5EEgoyMDI2LTEyLTEzGgNTSU4qAlRSMgM4MDUiHwoDU0lOEgoyMDI2LTEyLTE0GgNLVUwqAlRSMgM0NTZqBRIDSE5EcgUSA0tVTBohEgoyMDI2LTEyLTE1agUSA0tVTHIFEgNOUlRyBRIDSE5EQAFIAZgBAQ&curr=JPY&hl=ja&gl=JP",
+ "flight_link": "https://www.google.com/travel/flights/search?tfs=GlwSCjIwMjYtMTItMTMiHwoDSE5EEgoyMDI2LTEyLTEzGgNTSU4qAlRSMgM4MDUiHwoDU0lOEgoyMDI2LTEyLTEzGgNLVUwqAlRSMgM0NjhqBRIDSE5EcgUSA0tVTBohEgoyMDI2LTEyLTE1agUSA0tVTHIFEgNOUlRyBRIDSE5EQAFIAZgBAQ&curr=JPY&hl=ja&gl=JP",
  "target": 61000,
  "pred_low": 60924,
  "pred_lucky": 55000,
@@ -48,7 +48,7 @@
   "g_min": 60924.0,
   "g_max": 86265.0,
   "g_median": 72400.0,
-  "chg7": -13.18894271872328,
+  "chg7": -13.206256945038037,
   "chg14": -15.734439834024897
  },
  "reasons": [
@@ -56,7 +56,7 @@
   "この日程の直近60日で最安値に並んでいる",
   "この1週間で -13% 値下がり中（もう少し下がる余地あり）",
   "待っても下がりそうな幅が小さい（予想で ¥0 程度）",
-  "出発まで 40 日。そろそろ買い時の終盤"
+  "出発まで 39 日。そろそろ買い時の終盤"
  ],
  "google_history": [
   [
@@ -297,10 +297,14 @@
   ],
   [
    "2026-11-01",
-   71404.0
+   63424.0
   ],
   [
    "2026-11-02",
+   60924.0
+  ],
+  [
+   "2026-11-03",
    60924.0
   ]
  ],
@@ -772,6 +776,18 @@
    "target": 61000,
    "pred_low": 60924,
    "link": "https://www.google.com/travel/flights/search?tfs=GiESCjIwMjYtMTItMTNqBRIDTlJUagUSA0hORHIFEgNLVUwaIRIKMjAyNi0xMi0xNWoFEgNLVUxyBRIDTlJUcgUSA0hOREABSAGYAQE&curr=JPY&hl=ja&gl=JP"
+  },
+  {
+   "fetched_at": "2026-11-04 09:16",
+   "best_price": 60924.0,
+   "best_out": "2026-12-13",
+   "best_ret": "2026-12-15",
+   "airline": "スクート",
+   "verdict": "今買う",
+   "score": 4.0,
+   "target": 61000,
+   "pred_low": 60924,
+   "link": "https://www.google.com/travel/flights/search?tfs=GiESCjIwMjYtMTItMTNqBRIDTlJUagUSA0hORHIFEgNLVUwaIRIKMjAyNi0xMi0xNWoFEgNLVUxyBRIDTlJUcgUSA0hOREABSAGYAQE&curr=JPY&hl=ja&gl=JP"
   }
  ],
  "calendar": [
@@ -800,7 +816,7 @@
     {
      "out": "2026-12-14",
      "ret": "2026-12-16",
-     "price": 60924.0,
+     "price": 63424.0,
      "link": "https://www.google.com/travel/flights/search?tfs=GiESCjIwMjYtMTItMTRqBRIDTlJUagUSA0hORHIFEgNLVUwaIRIKMjAyNi0xMi0xNmoFEgNLVUxyBRIDTlJUcgUSA0hOREABSAGYAQE&curr=JPY&hl=ja&gl=JP"
     },
     {
@@ -824,19 +840,19 @@
     {
      "out": "2026-12-18",
      "ret": "2026-12-20",
-     "price": 88802.0,
+     "price": 88880.0,
      "link": "https://www.google.com/travel/flights/search?tfs=GiESCjIwMjYtMTItMThqBRIDTlJUagUSA0hORHIFEgNLVUwaIRIKMjAyNi0xMi0yMGoFEgNLVUxyBRIDTlJUcgUSA0hOREABSAGYAQE&curr=JPY&hl=ja&gl=JP"
     },
     {
      "out": "2026-12-19",
      "ret": "2026-12-21",
-     "price": 80423.0,
+     "price": 79403.0,
      "link": "https://www.google.com/travel/flights/search?tfs=GiESCjIwMjYtMTItMTlqBRIDTlJUagUSA0hORHIFEgNLVUwaIRIKMjAyNi0xMi0yMWoFEgNLVUxyBRIDTlJUcgUSA0hOREABSAGYAQE&curr=JPY&hl=ja&gl=JP"
     },
     {
      "out": "2026-12-20",
      "ret": "2026-12-22",
-     "price": 80423.0,
+     "price": 76423.0,
      "link": "https://www.google.com/travel/flights/search?tfs=GiESCjIwMjYtMTItMjBqBRIDTlJUagUSA0hORHIFEgNLVUwaIRIKMjAyNi0xMi0yMmoFEgNLVUxyBRIDTlJUcgUSA0hOREABSAGYAQE&curr=JPY&hl=ja&gl=JP"
     },
     {
@@ -848,13 +864,13 @@
     {
      "out": "2026-12-22",
      "ret": "2026-12-24",
-     "price": 76423.0,
+     "price": 80423.0,
      "link": "https://www.google.com/travel/flights/search?tfs=GiESCjIwMjYtMTItMjJqBRIDTlJUagUSA0hORHIFEgNLVUwaIRIKMjAyNi0xMi0yNGoFEgNLVUxyBRIDTlJUcgUSA0hOREABSAGYAQE&curr=JPY&hl=ja&gl=JP"
     },
     {
      "out": "2026-12-23",
      "ret": "2026-12-25",
-     "price": 75403.0,
+     "price": 80403.0,
      "link": "https://www.google.com/travel/flights/search?tfs=GiESCjIwMjYtMTItMjNqBRIDTlJUagUSA0hORHIFEgNLVUwaIRIKMjAyNi0xMi0yNWoFEgNLVUxyBRIDTlJUcgUSA0hOREABSAGYAQE&curr=JPY&hl=ja&gl=JP"
     },
     {
@@ -866,7 +882,7 @@
     {
      "out": "2026-12-25",
      "ret": "2026-12-27",
-     "price": 98934.0,
+     "price": 100423.0,
      "link": "https://www.google.com/travel/flights/search?tfs=GiESCjIwMjYtMTItMjVqBRIDTlJUagUSA0hORHIFEgNLVUwaIRIKMjAyNi0xMi0yN2oFEgNLVUxyBRIDTlJUcgUSA0hOREABSAGYAQE&curr=JPY&hl=ja&gl=JP"
     },
     {
@@ -884,7 +900,7 @@
     {
      "out": "2026-12-28",
      "ret": "2026-12-30",
-     "price": 97687.0,
+     "price": 100423.0,
      "link": "https://www.google.com/travel/flights/search?tfs=GiESCjIwMjYtMTItMjhqBRIDTlJUagUSA0hORHIFEgNLVUwaIRIKMjAyNi0xMi0zMGoFEgNLVUxyBRIDTlJUcgUSA0hOREABSAGYAQE&curr=JPY&hl=ja&gl=JP"
     },
     {
@@ -896,7 +912,7 @@
     {
      "out": "2026-12-30",
      "ret": "2027-01-01",
-     "price": 93423.0,
+     "price": 84045.0,
      "link": "https://www.google.com/travel/flights/search?tfs=GiESCjIwMjYtMTItMzBqBRIDTlJUagUSA0hORHIFEgNLVUwaIRIKMjAyNy0wMS0wMWoFEgNLVUxyBRIDTlJUcgUSA0hOREABSAGYAQE&curr=JPY&hl=ja&gl=JP"
     },
     {
@@ -932,7 +948,7 @@
     {
      "out": "2026-12-13",
      "ret": "2026-12-16",
-     "price": 60924.0,
+     "price": 63424.0,
      "link": "https://www.google.com/travel/flights/search?tfs=GiESCjIwMjYtMTItMTNqBRIDTlJUagUSA0hORHIFEgNLVUwaIRIKMjAyNi0xMi0xNmoFEgNLVUxyBRIDTlJUcgUSA0hOREABSAGYAQE&curr=JPY&hl=ja&gl=JP"
     },
     {
@@ -956,7 +972,7 @@
     {
      "out": "2026-12-17",
      "ret": "2026-12-20",
-     "price": 83802.0,
+     "price": 83880.0,
      "link": "https://www.google.com/travel/flights/search?tfs=GiESCjIwMjYtMTItMTdqBRIDTlJUagUSA0hORHIFEgNLVUwaIRIKMjAyNi0xMi0yMGoFEgNLVUxyBRIDTlJUcgUSA0hOREABSAGYAQE&curr=JPY&hl=ja&gl=JP"
     },
     {
@@ -968,7 +984,7 @@
     {
      "out": "2026-12-19",
      "ret": "2026-12-22",
-     "price": 80423.0,
+     "price": 76423.0,
      "link": "https://www.google.com/travel/flights/search?tfs=GiESCjIwMjYtMTItMTlqBRIDTlJUagUSA0hORHIFEgNLVUwaIRIKMjAyNi0xMi0yMmoFEgNLVUxyBRIDTlJUcgUSA0hOREABSAGYAQE&curr=JPY&hl=ja&gl=JP"
     },
     {
@@ -980,7 +996,7 @@
     {
      "out": "2026-12-21",
      "ret": "2026-12-24",
-     "price": 76423.0,
+     "price": 80423.0,
      "link": "https://www.google.com/travel/flights/search?tfs=GiESCjIwMjYtMTItMjFqBRIDTlJUagUSA0hORHIFEgNLVUwaIRIKMjAyNi0xMi0yNGoFEgNLVUxyBRIDTlJUcgUSA0hOREABSAGYAQE&curr=JPY&hl=ja&gl=JP"
     },
     {
@@ -992,7 +1008,7 @@
     {
      "out": "2026-12-23",
      "ret": "2026-12-26",
-     "price": 75403.0,
+     "price": 80403.0,
      "link": "https://www.google.com/travel/flights/search?tfs=GiESCjIwMjYtMTItMjNqBRIDTlJUagUSA0hORHIFEgNLVUwaIRIKMjAyNi0xMi0yNmoFEgNLVUxyBRIDTlJUcgUSA0hOREABSAGYAQE&curr=JPY&hl=ja&gl=JP"
     },
     {
@@ -1004,19 +1020,19 @@
     {
      "out": "2026-12-25",
      "ret": "2026-12-28",
-     "price": 94650.0,
+     "price": 101045.0,
      "link": "https://www.google.com/travel/flights/search?tfs=GiESCjIwMjYtMTItMjVqBRIDTlJUagUSA0hORHIFEgNLVUwaIRIKMjAyNi0xMi0yOGoFEgNLVUxyBRIDTlJUcgUSA0hOREABSAGYAQE&curr=JPY&hl=ja&gl=JP"
     },
     {
      "out": "2026-12-26",
      "ret": "2026-12-29",
-     "price": 97527.0,
+     "price": 100423.0,
      "link": "https://www.google.com/travel/flights/search?tfs=GiESCjIwMjYtMTItMjZqBRIDTlJUagUSA0hORHIFEgNLVUwaIRIKMjAyNi0xMi0yOWoFEgNLVUxyBRIDTlJUcgUSA0hOREABSAGYAQE&curr=JPY&hl=ja&gl=JP"
     },
     {
      "out": "2026-12-27",
      "ret": "2026-12-30",
-     "price": 111687.0,
+     "price": 117266.0,
      "link": "https://www.google.com/travel/flights/search?tfs=GiESCjIwMjYtMTItMjdqBRIDTlJUagUSA0hORHIFEgNLVUwaIRIKMjAyNi0xMi0zMGoFEgNLVUxyBRIDTlJUcgUSA0hOREABSAGYAQE&curr=JPY&hl=ja&gl=JP"
     },
     {
@@ -1028,7 +1044,7 @@
     {
      "out": "2026-12-29",
      "ret": "2027-01-01",
-     "price": 100423.0,
+     "price": 93687.0,
      "link": "https://www.google.com/travel/flights/search?tfs=GiESCjIwMjYtMTItMjlqBRIDTlJUagUSA0hORHIFEgNLVUwaIRIKMjAyNy0wMS0wMWoFEgNLVUxyBRIDTlJUcgUSA0hOREABSAGYAQE&curr=JPY&hl=ja&gl=JP"
     },
     {
@@ -1058,7 +1074,7 @@
     {
      "out": "2026-12-12",
      "ret": "2026-12-16",
-     "price": 60924.0,
+     "price": 63424.0,
      "link": "https://www.google.com/travel/flights/search?tfs=GiESCjIwMjYtMTItMTJqBRIDTlJUagUSA0hORHIFEgNLVUwaIRIKMjAyNi0xMi0xNmoFEgNLVUxyBRIDTlJUcgUSA0hOREABSAGYAQE&curr=JPY&hl=ja&gl=JP"
     },
     {
@@ -1082,7 +1098,7 @@
     {
      "out": "2026-12-16",
      "ret": "2026-12-20",
-     "price": 81940.0,
+     "price": 82029.0,
      "link": "https://www.google.com/travel/flights/search?tfs=GiESCjIwMjYtMTItMTZqBRIDTlJUagUSA0hORHIFEgNLVUwaIRIKMjAyNi0xMi0yMGoFEgNLVUxyBRIDTlJUcgUSA0hOREABSAGYAQE&curr=JPY&hl=ja&gl=JP"
     },
     {
@@ -1094,7 +1110,7 @@
     {
      "out": "2026-12-18",
      "ret": "2026-12-22",
-     "price": 80423.0,
+     "price": 76423.0,
      "link": "https://www.google.com/travel/flights/search?tfs=GiESCjIwMjYtMTItMThqBRIDTlJUagUSA0hORHIFEgNLVUwaIRIKMjAyNi0xMi0yMmoFEgNLVUxyBRIDTlJUcgUSA0hOREABSAGYAQE&curr=JPY&hl=ja&gl=JP"
     },
     {
@@ -1106,7 +1122,7 @@
     {
      "out": "2026-12-20",
      "ret": "2026-12-24",
-     "price": 76423.0,
+     "price": 80423.0,
      "link": "https://www.google.com/travel/flights/search?tfs=GiESCjIwMjYtMTItMjBqBRIDTlJUagUSA0hORHIFEgNLVUwaIRIKMjAyNi0xMi0yNGoFEgNLVUxyBRIDTlJUcgUSA0hOREABSAGYAQE&curr=JPY&hl=ja&gl=JP"
     },
     {
@@ -1124,7 +1140,7 @@
     {
      "out": "2026-12-23",
      "ret": "2026-12-27",
-     "price": 78934.0,
+     "price": 86423.0,
      "link": "https://www.google.com/travel/flights/search?tfs=GiESCjIwMjYtMTItMjNqBRIDTlJUagUSA0hORHIFEgNLVUwaIRIKMjAyNi0xMi0yN2oFEgNLVUxyBRIDTlJUcgUSA0hOREABSAGYAQE&curr=JPY&hl=ja&gl=JP"
     },
     {
@@ -1136,7 +1152,7 @@
     {
      "out": "2026-12-25",
      "ret": "2026-12-29",
-     "price": 94650.0,
+     "price": 100423.0,
      "link": "https://www.google.com/travel/flights/search?tfs=GiESCjIwMjYtMTItMjVqBRIDTlJUagUSA0hORHIFEgNLVUwaIRIKMjAyNi0xMi0yOWoFEgNLVUxyBRIDTlJUcgUSA0hOREABSAGYAQE&curr=JPY&hl=ja&gl=JP"
     },
     {
@@ -1154,7 +1170,7 @@
     {
      "out": "2026-12-28",
      "ret": "2027-01-01",
-     "price": 100423.0,
+     "price": 93687.0,
      "link": "https://www.google.com/travel/flights/search?tfs=GiESCjIwMjYtMTItMjhqBRIDTlJUagUSA0hORHIFEgNLVUwaIRIKMjAyNy0wMS0wMWoFEgNLVUxyBRIDTlJUcgUSA0hOREABSAGYAQE&curr=JPY&hl=ja&gl=JP"
     },
     {
@@ -1179,16 +1195,16 @@
     {
      "month": "11月",
      "min": 50424.0,
-     "median": 56904.0,
-     "n": 27,
-     "out": "2026-11-23",
-     "ret": "2026-11-25",
-     "link": "https://www.google.com/travel/flights/search?tfs=GiESCjIwMjYtMTEtMjNqBRIDTlJUagUSA0hORHIFEgNLVUwaIRIKMjAyNi0xMS0yNWoFEgNLVUxyBRIDTlJUcgUSA0hOREABSAGYAQE&curr=JPY&hl=ja&gl=JP"
+     "median": 56914.0,
+     "n": 26,
+     "out": "2026-11-28",
+     "ret": "2026-11-30",
+     "link": "https://www.google.com/travel/flights/search?tfs=GiESCjIwMjYtMTEtMjhqBRIDTlJUagUSA0hORHIFEgNLVUwaIRIKMjAyNi0xMS0zMGoFEgNLVUxyBRIDTlJUcgUSA0hOREABSAGYAQE&curr=JPY&hl=ja&gl=JP"
     },
     {
      "month": "希望期間",
      "min": 60924.0,
-     "median": 80423.0,
+     "median": 80413.0,
      "n": 22,
      "out": "2026-12-13",
      "ret": "2026-12-15",
@@ -1196,12 +1212,12 @@
     },
     {
      "month": "期間後の1月",
-     "min": 60660.0,
-     "median": 66254.0,
+     "min": 60680.0,
+     "median": 64708.5,
      "n": 28,
-     "out": "2027-01-18",
-     "ret": "2027-01-20",
-     "link": "https://www.google.com/travel/flights/search?tfs=GiESCjIwMjctMDEtMThqBRIDTlJUagUSA0hORHIFEgNLVUwaIRIKMjAyNy0wMS0yMGoFEgNLVUxyBRIDTlJUcgUSA0hOREABSAGYAQE&curr=JPY&hl=ja&gl=JP"
+     "out": "2027-01-11",
+     "ret": "2027-01-13",
+     "link": "https://www.google.com/travel/flights/search?tfs=GiESCjIwMjctMDEtMTFqBRIDTlJUagUSA0hORHIFEgNLVUwaIRIKMjAyNy0wMS0xM2oFEgNLVUxyBRIDTlJUcgUSA0hOREABSAGYAQE&curr=JPY&hl=ja&gl=JP"
     }
    ]
   },
@@ -1211,8 +1227,8 @@
     {
      "month": "11月",
      "min": 50424.0,
-     "median": 59404.0,
-     "n": 27,
+     "median": 56924.0,
+     "n": 26,
      "out": "2026-11-27",
      "ret": "2026-11-30",
      "link": "https://www.google.com/travel/flights/search?tfs=GiESCjIwMjYtMTEtMjdqBRIDTlJUagUSA0hORHIFEgNLVUwaIRIKMjAyNi0xMS0zMGoFEgNLVUxyBRIDTlJUcgUSA0hOREABSAGYAQE&curr=JPY&hl=ja&gl=JP"
@@ -1229,7 +1245,7 @@
     {
      "month": "期間後の1月",
      "min": 60680.0,
-     "median": 65935.0,
+     "median": 65993.0,
      "n": 28,
      "out": "2027-01-10",
      "ret": "2027-01-13",
@@ -1243,9 +1259,9 @@
    "price": 60924.0,
    "airline": "スクート",
    "route": "HND → SIN → KUL",
-   "flights": "TR805 / TR456",
+   "flights": "TR805 / TR468",
    "stops": 1,
-   "minutes": 1720,
+   "minutes": 1020,
    "legs": [
     {
      "from": "HND",
@@ -1257,12 +1273,12 @@
     {
      "from": "SIN",
      "to": "KUL",
-     "date": "2026-12-14",
+     "date": "2026-12-13",
      "airline": "TR",
-     "number": "456"
+     "number": "468"
     }
    ],
-   "link": "https://www.google.com/travel/flights/search?tfs=GlwSCjIwMjYtMTItMTMiHwoDSE5EEgoyMDI2LTEyLTEzGgNTSU4qAlRSMgM4MDUiHwoDU0lOEgoyMDI2LTEyLTE0GgNLVUwqAlRSMgM0NTZqBRIDSE5EcgUSA0tVTBohEgoyMDI2LTEyLTE1agUSA0tVTHIFEgNOUlRyBRIDSE5EQAFIAZgBAQ&curr=JPY&hl=ja&gl=JP"
+   "link": "https://www.google.com/travel/flights/search?tfs=GlwSCjIwMjYtMTItMTMiHwoDSE5EEgoyMDI2LTEyLTEzGgNTSU4qAlRSMgM4MDUiHwoDU0lOEgoyMDI2LTEyLTEzGgNLVUwqAlRSMgM0NjhqBRIDSE5EcgUSA0tVTBohEgoyMDI2LTEyLTE1agUSA0tVTHIFEgNOUlRyBRIDSE5EQAFIAZgBAQ&curr=JPY&hl=ja&gl=JP"
   },
   {
    "price": 68923.0,
@@ -1315,7 +1331,7 @@
    "link": "https://www.google.com/travel/flights/search?tfs=GlwSCjIwMjYtMTItMTMiHwoDTlJUEgoyMDI2LTEyLTEzGgNTSU4qAlRSMgM4OTUiHwoDU0lOEgoyMDI2LTEyLTEzGgNLVUwqAlRSMgM0NjhqBRIDTlJUcgUSA0tVTBohEgoyMDI2LTEyLTE1agUSA0tVTHIFEgNOUlRyBRIDSE5EQAFIAZgBAQ&curr=JPY&hl=ja&gl=JP"
   },
   {
-   "price": 96651.0,
+   "price": 86556.0,
    "airline": "タイ・エアアジアX",
    "route": "NRT → DMK → KUL",
    "flights": "XJ603 / AK897",
@@ -1390,25 +1406,7 @@
    "link": "https://www.google.com/travel/flights/search?tfs=GlwSCjIwMjYtMTItMTMiHwoDSE5EEgoyMDI2LTEyLTEzGgNTR04qAlZKMgM4MjEiHwoDU0dOEgoyMDI2LTEyLTEzGgNLVUwqAlZKMgM4MjVqBRIDSE5EcgUSA0tVTBohEgoyMDI2LTEyLTE1agUSA0tVTHIFEgNOUlRyBRIDSE5EQAFIAZgBAQ&curr=JPY&hl=ja&gl=JP"
   },
   {
-   "price": 121037.0,
-   "airline": "ZIPAIR Tokyo",
-   "route": "NRT → KUL",
-   "flights": "ZG61",
-   "stops": 0,
-   "minutes": 470,
-   "legs": [
-    {
-     "from": "NRT",
-     "to": "KUL",
-     "date": "2026-12-13",
-     "airline": "ZG",
-     "number": "61"
-    }
-   ],
-   "link": "https://www.google.com/travel/flights/search?tfs=GjoSCjIwMjYtMTItMTMiHgoDTlJUEgoyMDI2LTEyLTEzGgNLVUwqAlpHMgI2MWoFEgNOUlRyBRIDS1VMGiESCjIwMjYtMTItMTVqBRIDS1VMcgUSA05SVHIFEgNITkRAAUgBmAEB&curr=JPY&hl=ja&gl=JP"
-  },
-  {
-   "price": 121458.0,
+   "price": 115958.0,
    "airline": "エアアジアX",
    "route": "HND → KUL",
    "flights": "D7523",
@@ -1426,7 +1424,25 @@
    "link": "https://www.google.com/travel/flights/search?tfs=GjsSCjIwMjYtMTItMTMiHwoDSE5EEgoyMDI2LTEyLTEzGgNLVUwqAkQ3MgM1MjNqBRIDSE5EcgUSA0tVTBohEgoyMDI2LTEyLTE1agUSA0tVTHIFEgNOUlRyBRIDSE5EQAFIAZgBAQ&curr=JPY&hl=ja&gl=JP"
   },
   {
-   "price": 147790.0,
+   "price": 121138.0,
+   "airline": "ZIPAIR Tokyo",
+   "route": "NRT → KUL",
+   "flights": "ZG61",
+   "stops": 0,
+   "minutes": 470,
+   "legs": [
+    {
+     "from": "NRT",
+     "to": "KUL",
+     "date": "2026-12-13",
+     "airline": "ZG",
+     "number": "61"
+    }
+   ],
+   "link": "https://www.google.com/travel/flights/search?tfs=GjoSCjIwMjYtMTItMTMiHgoDTlJUEgoyMDI2LTEyLTEzGgNLVUwqAlpHMgI2MWoFEgNOUlRyBRIDS1VMGiESCjIwMjYtMTItMTVqBRIDS1VMcgUSA05SVHIFEgNITkRAAUgBmAEB&curr=JPY&hl=ja&gl=JP"
+  },
+  {
+   "price": 147810.0,
    "airline": "ANA",
    "route": "HND → KUL",
    "flights": "NH885",
@@ -1480,22 +1496,22 @@
    "link": "https://www.google.com/travel/flights/search?tfs=GjoSCjIwMjYtMTItMTMiHgoDTlJUEgoyMDI2LTEyLTEzGgNLVUwqAk1IMgI3MWoFEgNOUlRyBRIDS1VMGiESCjIwMjYtMTItMTVqBRIDS1VMcgUSA05SVHIFEgNITkRAAUgBmAEB&curr=JPY&hl=ja&gl=JP"
   },
   {
-   "price": 202420.0,
-   "airline": "JAL",
+   "price": 188520.0,
+   "airline": "ANA",
    "route": "NRT → KUL",
-   "flights": "JL723",
+   "flights": "NH815",
    "stops": 0,
-   "minutes": 470,
+   "minutes": 480,
    "legs": [
     {
      "from": "NRT",
      "to": "KUL",
      "date": "2026-12-13",
-     "airline": "JL",
-     "number": "723"
+     "airline": "NH",
+     "number": "815"
     }
    ],
-   "link": "https://www.google.com/travel/flights/search?tfs=GjsSCjIwMjYtMTItMTMiHwoDTlJUEgoyMDI2LTEyLTEzGgNLVUwqAkpMMgM3MjNqBRIDTlJUcgUSA0tVTBohEgoyMDI2LTEyLTE1agUSA0tVTHIFEgNOUlRyBRIDSE5EQAFIAZgBAQ&curr=JPY&hl=ja&gl=JP"
+   "link": "https://www.google.com/travel/flights/search?tfs=GjsSCjIwMjYtMTItMTMiHwoDTlJUEgoyMDI2LTEyLTEzGgNLVUwqAk5IMgM4MTVqBRIDTlJUcgUSA0tVTBohEgoyMDI2LTEyLTE1agUSA0tVTHIFEgNOUlRyBRIDSE5EQAFIAZgBAQ&curr=JPY&hl=ja&gl=JP"
   }
  ],
  "candidates": [
@@ -1507,18 +1523,18 @@
    "link": "https://www.google.com/travel/flights/search?tfs=GiESCjIwMjYtMTItMTNqBRIDTlJUagUSA0hORHIFEgNLVUwaIRIKMjAyNi0xMi0xNWoFEgNLVUxyBRIDTlJUcgUSA0hOREABSAGYAQE&curr=JPY&hl=ja&gl=JP"
   },
   {
-   "out": "2026-12-14",
-   "ret": "2026-12-16",
-   "price": 60924.0,
-   "airline": "スクート",
-   "link": "https://www.google.com/travel/flights/search?tfs=GiESCjIwMjYtMTItMTRqBRIDTlJUagUSA0hORHIFEgNLVUwaIRIKMjAyNi0xMi0xNmoFEgNLVUxyBRIDTlJUcgUSA0hOREABSAGYAQE&curr=JPY&hl=ja&gl=JP"
-  },
-  {
    "out": "2026-12-12",
    "ret": "2026-12-15",
    "price": 60924.0,
    "airline": "スクート",
    "link": "https://www.google.com/travel/flights/search?tfs=GiESCjIwMjYtMTItMTJqBRIDTlJUagUSA0hORHIFEgNLVUwaIRIKMjAyNi0xMi0xNWoFEgNLVUxyBRIDTlJUcgUSA0hOREABSAGYAQE&curr=JPY&hl=ja&gl=JP"
+  },
+  {
+   "out": "2026-12-11",
+   "ret": "2026-12-15",
+   "price": 60924.0,
+   "airline": "スクート",
+   "link": "https://www.google.com/travel/flights/search?tfs=GiESCjIwMjYtMTItMTFqBRIDTlJUagUSA0hORHIFEgNLVUwaIRIKMjAyNi0xMi0xNWoFEgNLVUxyBRIDTlJUcgUSA0hOREABSAGYAQE&curr=JPY&hl=ja&gl=JP"
   }
  ]
 }
